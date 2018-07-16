@@ -1,3 +1,6 @@
 <resources>
   <string name="app_name">AACSample</string>
+  <string name="github_search_repo_hint">Enter username here</string>
+  <string name="github_search_repo_button">search</string>
+  <string name="github_search_repo_title">Github repository search</string>
 </resources>

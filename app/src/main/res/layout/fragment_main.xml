@@ -7,33 +7,54 @@
   android:layout_height="match_parent"
   tools:context=".MainActivity">
 
-  <EditText
-    android:id="@+id/edit_text"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:text="android"/>
-
   <TextView
-    android:id="@+id/text_view"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="4dp"
-    android:layout_marginRight="4dp"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/edit_text"
-    tools:text="android"/>
-
-  <CheckBox
-    android:id="@+id/checkbox"
+    android:id="@+id/title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:layout_constraintBottom_toBottomOf="@+id/edit_text"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/github_search_repo_title"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="16sp"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toTopOf="@+id/repo_list"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/repo_list"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginBottom="16dp"
+    android:layout_marginTop="16dp"
+    android:clipToPadding="false"
+    app:layout_constraintBottom_toTopOf="@+id/input_container"
+    app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/edit_text"/>
+    app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+  <LinearLayout
+    android:id="@+id/input_container"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent">
+
+    <EditText
+      android:id="@+id/edit_text_username"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:hint="@string/github_search_repo_hint"/>
+
+    <Button
+      android:id="@+id/button_search"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/github_search_repo_button"/>
+
+  </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
