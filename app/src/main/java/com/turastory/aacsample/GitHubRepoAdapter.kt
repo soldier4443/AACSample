@@ -1,13 +1,13 @@
 package com.turastory.aacsample
 
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.turastory.aacsample.extensions.inflate
 import com.turastory.aacsample.vo.GitHubRepo
-import android.content.Intent
-import android.net.Uri
 
 
 /**
@@ -17,6 +17,10 @@ import android.net.Uri
 class GitHubRepoAdapter : RecyclerView.Adapter<GitHubRepoAdapter.ViewHolder>() {
 
     var repos: List<GitHubRepo>? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(parent)

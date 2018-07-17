@@ -1,7 +1,6 @@
 package com.turastory.aacsample.repository
 
 import android.arch.lifecycle.LiveData
-import android.content.Context
 import com.turastory.aacsample.vo.GitHubRepo
 
 /**
@@ -9,5 +8,5 @@ import com.turastory.aacsample.vo.GitHubRepo
  */
 
 interface GitHubRepository {
-    fun getRepo(username: String): LiveData<List<GitHubRepo>>
+    fun getRepos(username: String): LiveData<List<GitHubRepo>>
 }

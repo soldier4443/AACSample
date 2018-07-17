@@ -3,4 +3,5 @@
   <string name="github_search_repo_hint">Enter username here</string>
   <string name="github_search_repo_button">search</string>
   <string name="github_search_repo_title">Github repository search</string>
+  <string name="github_search_repo_title_with_name">Github repository search - %1$s</string>
 </resources>

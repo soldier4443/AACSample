@@ -11,40 +11,38 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:textColor="@color/colorPrimary"
+    android:textColor="@color/colorOnSurface"
     android:textSize="16sp"
+    android:textStyle="bold"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="Android Samples"/>
 
   <TextView
     android:id="@+id/repo_description"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
     android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     android:layout_marginTop="8dp"
-    android:textColor="@color/colorPrimaryDark"
+    android:textColor="@color/colorOnSurface"
     android:textSize="12sp"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@+id/repo_button"
     app:layout_constraintTop_toBottomOf="@+id/repo_name"
-    tools:text="This is android sample project."/>
+    tools:text="This is android sample project.This is android sample project. This is android sample project. This is android sample project. This is android sample project."/>
 
-  <ImageView
+  <ImageButton
     android:id="@+id/repo_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginRight="24dp"
+    android:layout_marginEnd="24dp"
+    android:background="@null"
     android:src="@drawable/ic_launch"
-    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintRight_toRightOf="parent"/>
-
-  <View
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:layout_marginTop="16dp"
-    android:background="@color/colorSurfaceIndicator"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/repo_description"/>
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

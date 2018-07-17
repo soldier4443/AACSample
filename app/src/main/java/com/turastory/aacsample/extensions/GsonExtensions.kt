@@ -9,8 +9,12 @@ import com.google.gson.reflect.TypeToken
  * Provide json conversion extension methods using Gson
  */
 
-private val basic = Gson()
+val basicGsonImpl = Gson()
 
-fun <T> T.toJson(): String = basic.toJson(this)
+fun <T> T.toJson(): String = basicGsonImpl.toJson(this)
 
-fun <T> String.fromJson(): T = basic.fromJson(this, object : TypeToken<T>() {}.type)
+// This is not working.. Because of type erasure, the type information is lost at Runtime.
+fun <T> String.fromJsonIncorrect(): T = basicGsonImpl.fromJson(this, object : TypeToken<T>() {}.type)
+
+// This is working. Because this function is inlined, and therefor
+inline fun <reified T> String.fromJson(): T = basicGsonImpl.fromJson(this, object : TypeToken<T>() {}.type)
