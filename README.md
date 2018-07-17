@@ -8,7 +8,7 @@ Android Architecture Components!!
 This is Android Sample Project, 
 using [AAC(Android Architecture Components)](https://developer.android.com/topic/libraries/architecture/) and Kotlin.
 
-It is a simple app that asks [GicotHub API](https://developer.github.m/v3/) to get user's repositories.
+It is a simple app that asks [GitHub API](https://developer.github.m/v3/) to get user's repositories.
 
 ## Techonology Stack
 
