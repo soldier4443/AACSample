@@ -84,7 +84,9 @@ class MainFragment : Fragment() {
             gitHubRepoAdapter.repos = null
             showLoadingScreen()
 
-            viewModel.init(usernameEditText.text.toString())
+            val username = usernameEditText.text.toString()
+            gitHubRepoAdapter.username = username
+            viewModel.init(username)
             viewModel.repos.observe(this, Observer { repos ->
                 if (repos != null) {
                     gitHubRepoAdapter.repos = repos
