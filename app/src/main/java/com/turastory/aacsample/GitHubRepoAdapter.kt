@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.item_github_repo.view.*
 
 class GitHubRepoAdapter : RecyclerView.Adapter<GitHubRepoAdapter.ViewHolder>() {
 
-    var username: String? = null
     var repos: List<GitHubRepo>? = null
         set(value) {
             field = value
@@ -30,20 +29,17 @@ class GitHubRepoAdapter : RecyclerView.Adapter<GitHubRepoAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        repos?.get(position)?.let { holder.bind(username, it) }
+        repos?.get(position)?.let { holder.bind(it) }
     }
 
     class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_github_repo)) {
-        fun bind(username: String?, item: GitHubRepo) {
+        fun bind(item: GitHubRepo) {
             itemView.repo_name.text = item.name
             itemView.repo_description.text = item.description
             itemView.repo_button.setOnClickListener {
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(constructRepositoryPath(item.name, username)))
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(item.url))
                 itemView.context?.startActivity(browserIntent)
             }
         }
-
-        private fun constructRepositoryPath(repositoryName: String, username: String?): String =
-            "https://github.com/$username/$repositoryName"
     }
 }

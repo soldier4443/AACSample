@@ -1,5 +1,7 @@
 package com.turastory.aacsample.vo
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Created by tura on 2018-07-16.
  *
@@ -8,5 +10,5 @@ package com.turastory.aacsample.vo
 
 data class GitHubRepo(val id: Int,
                       val name: String,
-                      var url: String,
+                      @SerializedName("html_url") var url: String,
                       val description: String)

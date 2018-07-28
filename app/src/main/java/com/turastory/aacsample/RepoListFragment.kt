@@ -74,11 +74,11 @@ class RepoListFragment : Fragment() {
 
     private fun setupButton() {
         button_search.setOnClickListener {
-            val username = edit_text_username.text.toString()
-            gitHubRepoAdapter.username = username
-            showUsername(username)
-            showLoadingScreen()
-            viewModel.loadRepos(username)
+            edit_text_username.text.toString().let {
+                showUsername(it)
+                showLoadingScreen()
+                viewModel.loadRepos(it)
+            }
         }
     }
 
