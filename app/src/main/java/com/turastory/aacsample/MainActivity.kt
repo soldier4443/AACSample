@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?.run {
             supportFragmentManager.beginTransaction()
-                .add(R.id.container, MainFragment(), MainFragment.TAG)
+                .add(R.id.container, RepoListFragment(), RepoListFragment.TAG)
                 .commit()
         }
     }

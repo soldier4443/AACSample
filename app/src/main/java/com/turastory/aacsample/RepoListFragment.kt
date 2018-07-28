@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_repository_list.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -19,10 +19,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
  *       onActivityCreated()
  */
 
-class MainFragment : Fragment() {
+class RepoListFragment : Fragment() {
 
     companion object {
-        const val TAG = "MainFragment"
+        const val TAG = "RepoListFragment"
     }
 
     private lateinit var gitHubRepoAdapter: GitHubRepoAdapter
@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
     private val viewModel: GitHubRepoViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_repository_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
