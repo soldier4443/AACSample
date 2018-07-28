@@ -10,5 +10,5 @@ import com.google.gson.annotations.SerializedName
 
 data class GitHubRepo(val id: Int,
                       val name: String,
-                      @SerializedName("html_url") var url: String,
+                      @SerializedName("html_url") val url: String,
                       val description: String)

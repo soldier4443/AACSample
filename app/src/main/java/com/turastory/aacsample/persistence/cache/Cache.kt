@@ -5,6 +5,7 @@ package com.turastory.aacsample.persistence.cache
  *
  * Represents local cache.
  */
+
 interface Cache<Item> {
     operator fun get(index: String): Item?
     operator fun set(index: String, value: Item)

@@ -11,10 +11,6 @@ import com.turastory.aacsample.vo.GitHubRepo
  */
 
 class GitHubRepoViewModel(private val repository: GitHubRepository) : ViewModel() {
-    companion object {
-        const val TAG = "GitHubRepoViewModel"
-    }
-
     // I used MediatorLiveData for the following reasons.
     // 1. We can expose stable instance of LiveData, which is immutable.
     // 2. Calling order of methods doesn't matter anymore.
