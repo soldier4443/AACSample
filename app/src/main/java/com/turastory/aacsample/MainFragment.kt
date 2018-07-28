@@ -21,6 +21,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
 
+    companion object {
+        const val TAG = "MainFragment"
+    }
+
     private lateinit var gitHubRepoAdapter: GitHubRepoAdapter
 
     private val viewModel: GitHubRepoViewModel by viewModel()
