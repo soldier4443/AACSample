@@ -4,11 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.turastory.aacsample.extensions.inflate
 import com.turastory.aacsample.vo.GitHubRepo
-
+import kotlinx.android.synthetic.main.item_github_repo.view.*
 
 /**
  * Created by tura on 2018-07-16.
@@ -36,14 +34,10 @@ class GitHubRepoAdapter : RecyclerView.Adapter<GitHubRepoAdapter.ViewHolder>() {
     }
 
     class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_github_repo)) {
-        private val name: TextView = itemView.findViewById(R.id.repo_name)
-        private val description: TextView = itemView.findViewById(R.id.repo_description)
-        private val openButton: ImageView = itemView.findViewById(R.id.repo_button)
-
         fun bind(username: String?, item: GitHubRepo) {
-            name.text = item.name
-            description.text = item.description
-            openButton.setOnClickListener {
+            itemView.repo_name.text = item.name
+            itemView.repo_description.text = item.description
+            itemView.repo_button.setOnClickListener {
                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(constructRepositoryPath(item.name, username)))
                 itemView.context?.startActivity(browserIntent)
             }

@@ -4,13 +4,10 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -24,12 +21,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
 
-    private lateinit var titleText: TextView
-    private lateinit var repositoryListView: RecyclerView
-    private lateinit var usernameEditText: EditText
-    private lateinit var searchButton: Button
-    private lateinit var loadingScreen: ViewGroup
-
     private lateinit var gitHubRepoAdapter: GitHubRepoAdapter
 
     private val viewModel: GitHubRepoViewModel by viewModel()
@@ -41,16 +32,12 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        usernameEditText = view.findViewById(R.id.edit_text_username)
-        loadingScreen = view.findViewById(R.id.loading_screen)
-
-        setupTitle(view)
-        setupAdapter(view)
-        setupButton(view)
+        setupTitle()
+        setupAdapter()
+        setupButton()
     }
 
-    private fun setupTitle(view: View) {
-        titleText = view.findViewById(R.id.title)
+    private fun setupTitle() {
         viewModel.username.observe({ lifecycle }, { username ->
             if (!username.isNullOrEmpty())
                 showTitleWithUsername(username)
@@ -60,31 +47,29 @@ class MainFragment : Fragment() {
     }
 
     private fun showTitleWithUsername(username: String?) {
-        titleText.text = getString(R.string.github_search_repo_title_with_name, username)
+        title.text = getString(R.string.github_search_repo_title_with_name, username)
     }
 
     private fun showJustTitle() {
-        titleText.text = getString(R.string.github_search_repo_title)
+        title.text = getString(R.string.github_search_repo_title)
     }
 
-    private fun setupAdapter(view: View) {
+    private fun setupAdapter() {
         gitHubRepoAdapter = GitHubRepoAdapter()
 
-        repositoryListView = view.findViewById(R.id.repo_list)
-        repositoryListView.apply {
+        repo_list.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = gitHubRepoAdapter
         }
     }
 
-    private fun setupButton(view: View) {
-        searchButton = view.findViewById(R.id.button_search)
-        searchButton.setOnClickListener {
+    private fun setupButton() {
+        button_search.setOnClickListener {
             gitHubRepoAdapter.repos = null
             showLoadingScreen()
 
-            val username = usernameEditText.text.toString()
+            val username = edit_text_username.text.toString()
             gitHubRepoAdapter.username = username
             viewModel.init(username)
             viewModel.repos.observe(this, Observer { repos ->
@@ -97,10 +82,10 @@ class MainFragment : Fragment() {
     }
 
     private fun showLoadingScreen() {
-        loadingScreen.visibility = View.VISIBLE
+        loading_screen.visibility = View.VISIBLE
     }
 
     private fun hideLoadingScreen() {
-        loadingScreen.visibility = View.INVISIBLE
+        loading_screen.visibility = View.INVISIBLE
     }
 }
