@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.turastory.aacsample.vo.GitHubRepo
 import kotlinx.android.synthetic.main.fragment_repository_list.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -36,26 +37,10 @@ class RepoListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupTitle()
         setupAdapter()
         setupButton()
-    }
 
-    private fun setupTitle() {
-        viewModel.username.observe({ lifecycle }, { username ->
-            if (!username.isNullOrEmpty())
-                showTitleWithUsername(username)
-            else
-                showJustTitle()
-        })
-    }
-
-    private fun showTitleWithUsername(username: String?) {
-        title.text = getString(R.string.github_search_repo_title_with_name, username)
-    }
-
-    private fun showJustTitle() {
-        title.text = getString(R.string.github_search_repo_title)
+        showJustTitle()
     }
 
     private fun setupAdapter() {
@@ -68,21 +53,48 @@ class RepoListFragment : Fragment() {
         }
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        subscribeUi()
+    }
+
+    private fun subscribeUi() {
+        viewModel.repos.observe(this, Observer(this@RepoListFragment::showRepos))
+    }
+
+    private fun showRepos(repos: List<GitHubRepo>?) {
+        if (repos != null) {
+            gitHubRepoAdapter.repos = repos
+            hideLoadingScreen()
+        } else {
+            showLoadingScreen()
+        }
+    }
+
     private fun setupButton() {
         button_search.setOnClickListener {
-            gitHubRepoAdapter.repos = null
-            showLoadingScreen()
-
             val username = edit_text_username.text.toString()
             gitHubRepoAdapter.username = username
-            viewModel.init(username)
-            viewModel.repos.observe(this, Observer { repos ->
-                if (repos != null) {
-                    gitHubRepoAdapter.repos = repos
-                    hideLoadingScreen()
-                }
-            })
+            showUsername(username)
+            showLoadingScreen()
+            viewModel.loadRepos(username)
         }
+    }
+
+    private fun showUsername(username: String) {
+        if (!username.isEmpty())
+            showTitleWithUsername(username)
+        else
+            showJustTitle()
+    }
+
+    private fun showTitleWithUsername(username: String?) {
+        title.text = getString(R.string.github_search_repo_title_with_name, username)
+    }
+
+    private fun showJustTitle() {
+        title.text = getString(R.string.github_search_repo_title)
     }
 
     private fun showLoadingScreen() {

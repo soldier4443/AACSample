@@ -10,6 +10,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         savedInstanceState?.run {
+            // Is there anything I can do here?
+        } ?: let {
             supportFragmentManager.beginTransaction()
                 .add(R.id.container, RepoListFragment(), RepoListFragment.TAG)
                 .commit()

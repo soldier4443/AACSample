@@ -1,7 +1,6 @@
 package com.turastory.aacsample
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.ViewModel
 import com.turastory.aacsample.repository.GitHubRepository
 import com.turastory.aacsample.vo.GitHubRepo
@@ -11,11 +10,17 @@ import com.turastory.aacsample.vo.GitHubRepo
  */
 
 class GitHubRepoViewModel(private val repository: GitHubRepository) : ViewModel() {
-    val username = MutableLiveData<String>()
-    lateinit var repos: LiveData<List<GitHubRepo>>
+    // I used MediatorLiveData for the following reasons.
+    // 1. We can expose stable instance of LiveData, which is immutable.
+    // 2. Calling order of methods doesn't matter anymore.
+    //    (We can observe this LiveData before we load repos. It was not possible in the previous version..)
+    val repos = MediatorLiveData<List<GitHubRepo>>()
 
-    fun init(username: String) {
-        this.username.value = username
-        this.repos = repository.getRepos(username)
+    fun loadRepos(username: String) {
+        val newRepos = repository.getRepos(username)
+        repos.addSource(newRepos) {
+            repos.removeSource(newRepos)
+            repos.value = it
+        }
     }
 }
